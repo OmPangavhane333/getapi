@@ -5,8 +5,7 @@ The project is a single-page application that fetches and displays a list of use
 # How to Run the Project
 
 1. **Clone the Repository**
-    git clone https://github.com/yourusername/your-repository.git
-    cd your-repository
+    git clone https://github.com/OmPangavhane333/getapi
 
 2. **Install Dependencies**
     flutter pub get
