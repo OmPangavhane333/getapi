@@ -2,16 +2,23 @@
 
 The project is a single-page application that fetches and displays a list of users with pagination, sorting, and filtering functionalities.
 
-# How to Run the Project
+## How to Run the Project
 
 1. **Clone the Repository**
+    ```bash
     git clone https://github.com/OmPangavhane333/getapi
+    cd getapi
+    ```
 
 2. **Install Dependencies**
+    ```bash
     flutter pub get
+    ```
 
 3. **Run the App**
+    ```bash
     flutter run
+    ```
 
 ## Usage
 
@@ -22,5 +29,3 @@ The project is a single-page application that fetches and displays a list of use
 
 ![Screenshot1](https://github.com/OmPangavhane333/getapi/blob/main/screenshot/Screenshot%20(317).png)
 ![Screenshot2](https://github.com/OmPangavhane333/getapi/blob/main/screenshot/Screenshot%20(318).png)
-
-
