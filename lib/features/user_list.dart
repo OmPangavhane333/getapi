@@ -1,16 +1,22 @@
 // lib/features/user_list.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:user_list_app/models/user.dart';
 import 'package:user_list_app/redux/actions.dart';
 import 'package:user_list_app/redux/reducer.dart';
 
+
 class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(title: Text('')),
+      
+      // for onnecting the widget to the Redux store
       body: StoreConnector<AppState, _ViewModel>(
+        // to  converting the store state to the _ViewModel
         converter: (store) => _ViewModel(
           users: store.state.users,
           fetchUsers: () => store.dispatch(FetchUsersAction([])),
@@ -20,9 +26,12 @@ class UserList extends StatelessWidget {
           onSortChange: (sortBy) => store.dispatch(SetSortByAction(sortBy!)),
           onFilterChange: (gender, country) => store.dispatch(SetFilterByAction(gender: gender ?? '', country: country ?? '')),
         ),
-        builder: (context, vm) {
+        
+        // to Build the UI with the converted ViewModel
+        builder: (context, viewmodel) {
           return Column(
             children: [
+              // here is header section with filters
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -31,8 +40,9 @@ class UserList extends StatelessWidget {
                     Text('Employees', style: TextStyle(fontSize: 40)),
                     Row(
                       children: [
+                        // dropdown filter for gender
                         DropdownButton<String>(
-                          value: vm.genderFilter.isEmpty ? null : vm.genderFilter,
+                          value: viewmodel.genderFilter.isEmpty ? null : viewmodel.genderFilter,
                           hint: Text('Gender'),
                           items: ['male', 'female'].map((String value) {
                             return DropdownMenuItem<String>(
@@ -40,11 +50,13 @@ class UserList extends StatelessWidget {
                               child: Text(value),
                             );
                           }).toList(),
-                          onChanged: (value) => vm.onFilterChange(value, vm.countryFilter),
+                          onChanged: (value) => viewmodel.onFilterChange(value, viewmodel.countryFilter),
                         ),
                         SizedBox(width: 8),
+                        
+                        // dropdown for country filter
                         DropdownButton<String>(
-                          value: vm.countryFilter.isEmpty ? null : vm.countryFilter,
+                          value: viewmodel.countryFilter.isEmpty ? null : viewmodel.countryFilter,
                           hint: Text('Country'),
                           items: ['USA', 'Canada', 'UK'].map((String value) {
                             return DropdownMenuItem<String>(
@@ -52,34 +64,38 @@ class UserList extends StatelessWidget {
                               child: Text(value),
                             );
                           }).toList(),
-                          onChanged: (value) => vm.onFilterChange(vm.genderFilter, value),
+                          onChanged: (value) => viewmodel.onFilterChange(viewmodel.genderFilter, value),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
+              
+              // Main user table logic
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: SingleChildScrollView( // Additional scrollable view for vertical scrolling
+                  child: SingleChildScrollView(
                     child: Table(
                       border: TableBorder.all(),
                       defaultColumnWidth: FixedColumnWidth(150.0),
                       children: [
+                        // heading rows of the table
                         TableRow(
-                          decoration: BoxDecoration(color: Colors.grey[200],
-                          ),
+                          decoration: BoxDecoration(color: Colors.grey[200]),
                           children: [
-                            TableCell(child: Center(child: Text('ID'),heightFactor: 2,)),
-                            TableCell(child: Center(child: Text('Image'),heightFactor: 2,)),
-                            TableCell(child: Center(child: Text('Full Name'),heightFactor: 2,)),
-                            TableCell(child: Center(child: Text('Demography'),heightFactor: 2,)),
-                            TableCell(child: Center(child: Text('Designation'),heightFactor: 2,)),
-                            TableCell(child: Center(child: Text('Country'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('ID'), heightFactor: 2)),
+                            TableCell(child: Center(child: Text('Image'), heightFactor: 2)),
+                            TableCell(child: Center(child: Text('Full Name'), heightFactor: 2)),
+                            TableCell(child: Center(child: Text('Demography'), heightFactor: 2)),
+                            TableCell(child: Center(child: Text('Designation'), heightFactor: 2)),
+                            TableCell(child: Center(child: Text('Country'), heightFactor: 2)),
                           ],
                         ),
-                        ...vm.users.asMap().entries.map((entry) {
+                        
+                        // Iterating over the users and creating a row for each user
+                        ...viewmodel.users.asMap().entries.map((entry) {
                           int index = entry.key;
                           User user = entry.value;
                           return TableRow(
@@ -91,7 +107,7 @@ class UserList extends StatelessWidget {
                                     child: Image.network(
                                       user.image,
                                       width: 40,
-                                      height: 40,
+                                      height: 57.6,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -113,8 +129,10 @@ class UserList extends StatelessWidget {
                   ),
                 ),
               ),
+              
+              // Button to load more users
               ElevatedButton(
-                onPressed: vm.fetchUsers,
+                onPressed: viewmodel.fetchUsers,
                 child: Text('Load More'),
               ),
             ],
@@ -125,7 +143,7 @@ class UserList extends StatelessWidget {
   }
 }
 
-
+// this is viewModel to map Redux state and actions to the widget
 class _ViewModel {
   final List<User> users;
   final void Function() fetchUsers;
