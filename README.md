@@ -20,7 +20,7 @@ The project is a single-page application that fetches and displays a list of use
 
 ## Screenshots
 
-![Screenshot1](screenshots/screenshot1.png)
+![Screenshot1](https://github.com/OmPangavhane333/getapi/blob/main/screenshot/Screenshot%20(317).png)
 ![Screenshot2](screenshots/screenshot2.png)
 
 
