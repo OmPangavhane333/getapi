@@ -1,3 +1,4 @@
+// C:\Users\ompan\user_list_app\lib\redux\middleware.dart
 import 'package:redux/redux.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -27,14 +28,6 @@ void _fetchUsers(Store<AppState> store, FetchUsersAction action, NextDispatcher 
           return matchesGender && matchesCountry;
         })
         .toList();
-
-    if (store.state.sortBy == 'name') {
-      users.sort((a, b) => a.firstName.compareTo(b.firstName));
-    } else if (store.state.sortBy == 'age') {
-      users.sort((a, b) => a.age.compareTo(b.age));
-    } else if (store.state.sortBy == 'gender') {
-      users.sort((a, b) => a.gender.compareTo(b.gender));
-    }
 
     store.dispatch(FetchUsersAction(users));
   }

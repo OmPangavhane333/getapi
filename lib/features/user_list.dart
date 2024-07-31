@@ -9,7 +9,7 @@ class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('User List')),
+      appBar: AppBar(title: Text('')),
       body: StoreConnector<AppState, _ViewModel>(
         converter: (store) => _ViewModel(
           users: store.state.users,
@@ -28,7 +28,7 @@ class UserList extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Employees',style: TextStyle(fontSize: 40),),
+                    Text('Employees', style: TextStyle(fontSize: 40)),
                     Row(
                       children: [
                         DropdownButton<String>(
@@ -62,21 +62,21 @@ class UserList extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: SingleChildScrollView(
+                  child: SingleChildScrollView( // Additional scrollable view for vertical scrolling
                     child: Table(
                       border: TableBorder.all(),
                       defaultColumnWidth: FixedColumnWidth(150.0),
                       children: [
                         TableRow(
-                          decoration: BoxDecoration(color: Colors.grey[200]),
+                          decoration: BoxDecoration(color: Colors.grey[200],
+                          ),
                           children: [
-                            TableCell(child: Center(child: Text('ID'))),
-                            TableCell(child: Center(child: Text('Image'))),
-                            TableCell(child: Center(child: Text('Name'))),
-                            TableCell(child: Center(child: Text('Email'))),
-                            TableCell(child: Center(child: Text('Age'))),
-                            TableCell(child: Center(child: Text('Gender'))),
-                            TableCell(child: Center(child: Text('Country'))),
+                            TableCell(child: Center(child: Text('ID'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('Image'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('Full Name'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('Demography'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('Designation'),heightFactor: 2,)),
+                            TableCell(child: Center(child: Text('Country'),heightFactor: 2,)),
                           ],
                         ),
                         ...vm.users.asMap().entries.map((entry) {
@@ -98,9 +98,12 @@ class UserList extends StatelessWidget {
                                 ),
                               ),
                               TableCell(child: Center(child: Text('${user.firstName} ${user.lastName}'))),
-                              TableCell(child: Center(child: Text(user.email))),
-                              TableCell(child: Center(child: Text('${user.age}'))),
-                              TableCell(child: Center(child: Text(user.gender))),
+                              TableCell(
+                                child: Center(
+                                  child: Text('${user.gender == 'female' ? 'F' : 'M'}/${user.age}'),
+                                ),
+                              ),
+                              TableCell(child: Center(child: Text(user.designation))),
                               TableCell(child: Center(child: Text(user.country))),
                             ],
                           );
@@ -121,6 +124,7 @@ class UserList extends StatelessWidget {
     );
   }
 }
+
 
 class _ViewModel {
   final List<User> users;
