@@ -1,16 +1,27 @@
-# user_list_app
+# Flutter Assignment
 
-A new Flutter project.
+The project is a single-page application that fetches and displays a list of users with pagination, sorting, and filtering functionalities.
 
-## Getting Started
+# How to Run the Project
 
-This project is a starting point for a Flutter application.
+1. **Clone the Repository**
+    git clone https://github.com/yourusername/your-repository.git
+    cd your-repository
 
-A few resources to get you started if this is your first Flutter project:
+2. **Install Dependencies**
+    flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. **Run the App**
+    flutter run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+
+- Use the **Load More** button to fetch data from the API.
+- To filter data by gender and country, reload the page first, then select the filter options and press the **Load More** button.
+
+## Screenshots
+
+![Screenshot1](screenshots/screenshot1.png)
+![Screenshot2](screenshots/screenshot2.png)
+
+
