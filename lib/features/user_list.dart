@@ -1,5 +1,3 @@
-// lib/features/user_list.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:user_list_app/models/user.dart';

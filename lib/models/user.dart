@@ -1,4 +1,3 @@
-// This class represents a User model in our application
 class User {
   
   final int id;
